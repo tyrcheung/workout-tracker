@@ -30,12 +30,18 @@ jobs:
         run: npm run build
 
       - name: Disable Jekyll
-        run: touch dist/.nojekyll
+        # Make sure the folder exists first
+        run: |
+          mkdir -p build
+          touch build/.nojekyll
+
+      - name: SPA fallback
+        run: cp build/index.html build/404.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: build
 
   deploy:
     needs: build
