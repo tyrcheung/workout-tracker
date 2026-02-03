@@ -1,6 +1,8 @@
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
 
+const dev = process.env.NODE_ENV === 'development';
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   // Optional: allows you to use things like SCSS, PostCSS etc.
@@ -15,7 +17,7 @@ const config = {
     // Base path for GitHub Pages
     // Use your repo name as base when deploying
     paths: {
-      base: '/workout-tracker'
+      base: dev ? '' : '/workout-tracker'
     },
 
     // Optional: app directory for built assets
